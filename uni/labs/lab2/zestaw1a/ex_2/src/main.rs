@@ -5,25 +5,23 @@ fn czy_przestepny(year : u32) -> bool{
 
 
 fn main() {
-    let month_number : u8 = 20;
+    let month_number : u8 = 2;
     let year : u32 = 2001;
-    let days_count :u32;
+    let mut days_count :u32;
 
-    if !czy_przestepny(year){
-        if month_number == 1 {
-            days_count = 31;
-            println!("{days_count}");
-        }
-        if month_number == 2 {
-            days_count = 28;
-            println!("{days_count}");
-        }
-        if month_number == 3 {
-            days_count = 30;
-            println!("{days_count}");
-        }
-
+    if month_number % 2 == 0 {
+        days_count = 30;
+    } else {
+        days_count = 31;
     }
 
-    println!("Hello, world!");
+    if month_number == 2 && czy_przestepny(year){
+        days_count = 29;
+    }
+
+    if month_number == 2 && !czy_przestepny(year){
+        days_count = 28;
+    }
+
+    println!("Days count {days_count}");
 }
