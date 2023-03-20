@@ -8,7 +8,7 @@ fn met_newt_while(mut x0: f64, eps: f64, n: u128) -> f64 {
     let mut i: u128 = 0;
     let mut x1: f64 = 0.0;
 
-    while f64::abs(f(x1)) >= eps || f64::abs(x1 - x0) >= eps && i < n {
+    while f64::abs(f(x1)) >= eps || f64::abs(x1 - x0) >= eps && i <= n {
         x1 = x0 - f(x0) / fp(x0);
         x0 = x1;
         i += 1;
@@ -56,6 +56,27 @@ fn met_newt_rec(x0: f64, eps: f64, n: u128, i: u128) -> f64 {
     }
 }
 
+//version with function pointers
+
+fn met_newt_for_fp(
+    f: fn(x: f64) -> f64,
+    fp: fn(x: f64) -> f64,
+   mut x0: f64,
+    eps: f64,
+    n: u128) -> f64 {
+    let mut x1: f64 = x0;
+
+    for _i in 0..n {
+        x1 = x0 - f(x0) / fp(x0);
+        if f64::abs(f(x1)) < eps && f64::abs(x1 - x0) < eps {
+            break;
+        }
+        x0 = x1;
+    }
+
+    x1
+}
+
 fn f(x: f64) -> f64 {
     f64::powf(x, 2.0) - 4.0
 }
@@ -80,4 +101,8 @@ fn main() {
     let res_rec = met_newt_rec(3.0, 0.000001, 10000, 0);
 
     println!("Recursive version: {res_rec}");
+
+    let res_for_fp = met_newt_for_fp(f, fp, 3.0, 0.000001, 10000);
+
+    println!("For loop version with fuction pointers: {res_for_fp}");
 }
