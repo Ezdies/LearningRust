@@ -1,4 +1,5 @@
 fn roman_to_arabic(roman_literal: &str) -> Option<u32> {
+
     let numerals = vec![
         ('I', 1),
         ('V', 5),
