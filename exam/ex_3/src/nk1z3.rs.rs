@@ -1,3 +1,4 @@
+i
 fn hamming(a: &str, b: &str) -> Option<f32>{
     let fragment: f32 = 0.0;
     let sum: f32 = 0.0;
