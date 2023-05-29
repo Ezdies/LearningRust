@@ -2,23 +2,23 @@ use std::ops::Add;
 
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 pub struct PoraDnia {
-    hh: u32,
-    mm: u32,
     ss: u32,
 }
 
 impl PoraDnia {
     fn new(hh: u32, mm: u32, ss: u32) -> PoraDnia {
-        PoraDnia { hh, mm, ss }
+        PoraDnia {
+            ss: hh * 3600 + mm * 60 + ss,
+        }
     }
     fn h(&self) -> u32 {
-        self.hh
+        (self.ss / 3600) % 24
     }
     fn m(&self) -> u32 {
-        self.mm
+        (self.ss % 3600) / 60
     }
     fn s(&self) -> u32 {
-        self.ss
+        self.ss % 60
     }
 }
 
@@ -27,8 +27,6 @@ impl Add for PoraDnia {
 
     fn add(self, rhs: Self) -> Self {
         Self {
-            hh: self.hh + rhs.hh,
-            mm: self.mm + rhs.mm,
             ss: self.ss + rhs.ss,
         }
     }
