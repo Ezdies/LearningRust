@@ -1,4 +1,4 @@
-use std::ops::Add;
+use std::ops::{Add, Sub};
 
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 pub struct PoraDnia {
@@ -20,6 +20,15 @@ impl PoraDnia {
     fn s(&self) -> u32 {
         self.ss % 60
     }
+    fn as24h(&self) -> String {
+        format!("{}:{}:{}", self.h(), self.m(), self.s())
+    }
+    fn as12h(&self) -> String {
+        if self.h() <= 12 {
+            return format!("{}:{}:{}AM", self.h(), self.m(), self.s());
+        }
+        return format!("{}:{}:{}PM", self.h() - 12, self.m(), self.s());
+    }
 }
 
 impl Add for PoraDnia {
@@ -28,6 +37,16 @@ impl Add for PoraDnia {
     fn add(self, rhs: Self) -> Self {
         Self {
             ss: self.ss + rhs.ss,
+        }
+    }
+}
+
+impl Sub for PoraDnia {
+    type Output = Self;
+
+    fn sub(self, rhs: Self) -> Self {
+        Self {
+            ss: self.ss - rhs.ss,
         }
     }
 }
@@ -69,5 +88,26 @@ mod tests {
         let pd3 = PoraDnia::new(20, 22, 24);
         let pd4 = pd + pd2;
         assert_eq!(pd3, pd4);
+    }
+
+    #[test]
+    fn diff() {
+        let pd = PoraDnia::new(20, 20, 20);
+        let pd2 = PoraDnia::new(10, 10, 10);
+        let pd3 = PoraDnia::new(10, 10, 10);
+        let pd4 = pd - pd2;
+        assert_eq!(pd3, pd4);
+    }
+
+    #[test]
+    fn display_as_24() {
+        let pd = PoraDnia::new(21, 37, 37);
+        assert_eq!(pd.as24h(), "21:37:37");
+    }
+
+    #[test]
+    fn display_as_12() {
+        let pd = PoraDnia::new(21, 37, 37);
+        assert_eq!(pd.as12h(), "9:37:37PM");
     }
 }
