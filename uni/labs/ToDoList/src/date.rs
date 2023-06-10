@@ -6,7 +6,7 @@ pub struct Date {
 }
 
 impl Date {
-    fn new(day: u32, month: u32, year: u32) -> Date {
+    pub fn new(day: u32, month: u32, year: u32) -> Date {
         Date { day, month, year }
     }
     fn get_day(&self) -> u32 {
@@ -18,9 +18,9 @@ impl Date {
     fn get_year(&self) -> u32 {
         self.year
     }
-   fn print(&self) -> String {
-    format!("{:02}-{:02}-{}", self.day, self.month, self.year)
-}
+    pub fn print(&self) -> String {
+        format!("{:02}-{:02}-{}", self.day, self.month, self.year)
+    }
 }
 
 #[cfg(test)]
@@ -36,9 +36,9 @@ mod tests {
     }
 
     #[test]
-    fn printing(){
+    fn printing() {
         let date1 = Date::new(11, 2, 2003);
-        let date2 = Date::new(1,12, 1996);
+        let date2 = Date::new(1, 12, 1996);
         assert_eq!(date1.print(), "11-02-2003");
         assert_eq!(date2.print(), "01-12-1996");
     }
