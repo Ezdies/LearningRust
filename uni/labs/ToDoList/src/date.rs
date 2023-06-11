@@ -9,13 +9,13 @@ impl Date {
     pub fn new(day: u32, month: u32, year: u32) -> Date {
         Date { day, month, year }
     }
-    fn get_day(&self) -> u32 {
+    pub fn get_day(&self) -> u32 {
         self.day
     }
-    fn get_month(&self) -> u32 {
+    pub fn get_month(&self) -> u32 {
         self.month
     }
-    fn get_year(&self) -> u32 {
+    pub fn get_year(&self) -> u32 {
         self.year
     }
     pub fn print(&self) -> String {

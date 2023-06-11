@@ -7,16 +7,16 @@ pub struct Event {
 }
 
 impl Event {
-    fn new(description: String, date: Date) -> Event {
+    pub fn new(description: String, date: Date) -> Event {
         Event { description, date }
     }
-    fn get_description(&self) -> String {
+    pub fn get_description(&self) -> String {
         self.description.clone()
     }
-    fn get_date(&self) -> Date {
+    pub fn get_date(&self) -> Date {
         self.date.clone()
     }
-    fn print_info(&self) -> String {
+    pub fn print_info(&self) -> String {
         format!("{}\n{}", self.get_date().print(), self.get_description())
     }
 }
