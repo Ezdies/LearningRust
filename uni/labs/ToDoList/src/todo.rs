@@ -1,25 +1,25 @@
 use crate::event::Event;
 
 #[derive(Debug, PartialEq, PartialOrd, Clone, Eq, Ord)]
-struct ToDo {
+pub struct ToDo {
     events: Vec<Event>,
 }
 
 impl ToDo {
-    fn new() -> ToDo {
+    pub fn new() -> ToDo {
         ToDo { events: Vec::new() }
     }
 
-    fn add_event(&mut self, event: Event) {
+    pub fn add_event(&mut self, event: Event) {
         self.events.push(event);
     }
 
-    fn delete_event(&mut self, event: Event) {
+    pub fn delete_event(&mut self, event: Event) {
         let index = self.events.iter().position(|e| *e == event);
         self.events.remove(index.unwrap_or_default());
     }
 
-    fn print_list(&self) -> String {
+    pub fn print_list(&self) -> String {
         if !self.events.is_empty() {
             self.events.iter().map(|event| event.print_info()).collect()
         } else {
@@ -67,7 +67,6 @@ mod tests {
         list.delete_event(event1);
 
         assert_eq!(list.print_list(), list.get_events()[0].print_info());
-
     }
 
     #[test]
