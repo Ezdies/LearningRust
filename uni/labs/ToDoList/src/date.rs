@@ -1,4 +1,4 @@
-#[derive(Debug, PartialEq, PartialOrd, Clone, Eq, Ord)]
+#[derive(Debug, PartialEq, PartialOrd, Clone, Eq, Ord, Default)]
 pub struct Date {
     day: u32,
     month: u32,

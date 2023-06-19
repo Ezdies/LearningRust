@@ -1,6 +1,6 @@
 use crate::date::Date;
 
-#[derive(Debug, PartialEq, PartialOrd, Clone, Eq, Ord)]
+#[derive(Debug, PartialEq, PartialOrd, Clone, Eq, Ord, Default)]
 pub struct Event {
     description: String,
     date: Date,
